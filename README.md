@@ -32,4 +32,14 @@ To run unit tests execute command in this repository in your terminal:
 yarn test
 ```
 
+## Run application
+To run application locally run command below:
+```shell
+yarn dev
+```
 
+## TODO:
+- Fix cors issue
+- Implement fully image upload
+- Add tests
+- Add full functionality to add and remove image

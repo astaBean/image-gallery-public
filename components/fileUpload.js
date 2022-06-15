@@ -2,7 +2,7 @@ import 'react-image-upload/dist/index.css'
 import { useState } from 'react'
 import utilStyles from '../styles/utils.module.css'
 
-const UploadElement2 = () => {
+const UploadElement = () => {
   const [file, setFile] = useState(null)
   const fileHandler = async (e) => {
     const fileUploading = e.target.files[0]
@@ -40,11 +40,13 @@ const uploadFile = async (file) => {
   const getResponse = await fetch(`${serverUrl}/storage`, requestOptions)
   const s3Url = await getResponse.json()
   const preSignedUrl = s3Url.signedURL
+  console.info(`Pre-signed url ${preSignedUrl}`)
 
   const putRequestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'image/*' },
-    body: file
+    headers: { 'Content-Type': 'image/*', 'Access-Control-Allow-Origin': '*' },
+    body: file,
+    mode: 'no-cors'
   }
 
   try {
@@ -66,6 +68,6 @@ function isFileImage (file) {
 }
 
 export {
-  UploadElement2,
+  UploadElement,
   removeFile
 }

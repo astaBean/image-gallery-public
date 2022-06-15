@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
 import styles from '../styles/utils.module.css'
-import { UploadElement2 } from '../components/fileUpload'
+import { UploadElement } from '../components/fileUpload'
 
 const Favicon = () => (
   <link
     rel="icon"
-    href="/home/aistyna/home_projects/images-api-serveless/packages/public-site/public/favicon.ico"
+    href="/images/favicon.ico"
   />
 )
 
@@ -26,7 +26,7 @@ export default function Home () {
             Get started by uploading your images
           </p>
           <div className="d-flex justify-content-center">
-            <UploadElement2/>
+            <UploadElement/>
           </div>
         </main>
       </div>

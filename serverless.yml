@@ -1,0 +1,34 @@
+service: image-gallery-public
+frameworkVersion: '3'
+configValidationMode: error
+useDotenv: true
+
+provider:
+  name: aws
+  httpApi:
+    cors: true
+  runtime: nodejs16.x
+  stage: dev
+  endpointType: regional
+  profile: ${env:PROFILE}
+  timeout: 20
+  region: ${env:REGION, 'eu-west-2'}
+
+resources:
+  Resources:
+    imageGalleryPublic:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: image-gallery-public
+        AccessControl: PublicRead
+    imageGalleryPublicPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref imageGalleryPublic
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Action: 's3:GetObject'
+              Principal: '*'
+              Resource: !Sub '${imageGalleryPublic.Arn}/*'
